@@ -8,7 +8,7 @@ import org.emil.pojo.Student;
 public class MyConfig {
 
     @Bean
-    public Student getStudent(){
+    public Student student(){
         return new Student();
     }
 }
