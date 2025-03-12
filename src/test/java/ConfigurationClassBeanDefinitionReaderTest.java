@@ -1,5 +1,5 @@
 import org.emil.config.MyConfig;
-import org.emil.pojo.BeanDefinition;
+import org.emil.beanBuilder.BeanDefinition;
 import org.emil.pojo.Student;
 import org.emil.processors.ConfigurationClassBeanDefinitionReader;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 /**
  * √ 1. 找到所有@Configuration类 -> ConfigurationClassPostProcessor
  * √ 2. 解析@Configuration类，找到@Bean方法 -> ConfigurationClassParser
- * 3. 为@Bean方法生成Bean定义对象（BeanDefinition） -> ConfigurationClassBeanDefinitionReader
+ * √ 3. 为@Bean方法生成Bean定义对象（BeanDefinition） -> ConfigurationClassBeanDefinitionReader
  * 4. BeanFactory实例化Bean对象
  */

@@ -1,8 +1,7 @@
 package org.emil.processors;
 
-import org.emil.pojo.BeanDefinition;
+import org.emil.beanBuilder.BeanDefinition;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;

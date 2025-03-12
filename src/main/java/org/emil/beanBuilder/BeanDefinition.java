@@ -1,4 +1,4 @@
-package org.emil.pojo;
+package org.emil.beanBuilder;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
