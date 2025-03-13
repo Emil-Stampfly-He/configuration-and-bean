@@ -42,6 +42,7 @@ public class ConfigurationClassBeanDefinitionReader {
                     beanDefinition.setBeanName(clazz.getSimpleName() + "#" + method.getName());
                     beanDefinition.setFactoryMethod(method);
                     beanDefinition.setFactoryBean(configInstance);
+                    beanDefinition.setSingleton(true);
 
                     // 5. 往容器中注册BeanDefinition
                     beanContainer.put(beanDefinition.getBeanName(), beanDefinition);

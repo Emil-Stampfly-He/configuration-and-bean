@@ -23,25 +23,26 @@ public class BeanFactory {
         ConfigurationClassBeanDefinitionReader reader = new ConfigurationClassBeanDefinitionReader();
         Map<String, BeanDefinition> beanDefinitionContainer = reader.getBeanDefinition();
 
-        // 1. 检查缓存是否已经创建过Bean
-        if (singletonBeanContainer.containsKey(beanName)) {
-            // 2. 如果创建过，则直接返回这个Bean
+        // 1. 获取beanDefinition
+        BeanDefinition beanDefinition = beanDefinitionContainer.get(beanName);
+        if (beanDefinition == null) {
+            throw new RuntimeException("No bean definition found with name " + beanName);
+        }
+
+        // 2. 检查缓存是否已经创建过Bean
+        if (beanDefinition.isSingleton() && singletonBeanContainer.containsKey(beanName)) {
+            // 21. 如果创建过，则直接返回这个Bean
             return singletonBeanContainer.get(beanName);
         }
 
-        // 3. 进行Bean的实例化
-        // 3.1 获取beanDefinition
-        BeanDefinition beanDefinition = beanDefinitionContainer.get(beanName);
-        if (beanDefinition == null) {
-            throw new RuntimeException("No BeanDefinition found for " + beanName);
-        }
 
-        // 3.2 获取工厂方法和配置类实例
+        // 3. 根据BeanDefinition创建Bean
+        // 3.1 获取工厂方法和配置类实例
         Method factoryMethod = beanDefinition.getFactoryMethod();
         factoryMethod.setAccessible(true);
         Object configInstance = beanDefinition.getFactoryBean();
 
-        // 3.3 处理参数解析
+        // 3.2 处理参数解析
         Object beanInstance = null;
         try {
             Class<?>[] parameterTypes = factoryMethod.getParameterTypes();
@@ -56,7 +57,9 @@ public class BeanFactory {
         }
 
         // 4. 缓存单例实例
-        singletonBeanContainer.put(beanName, beanInstance);
+        if (beanDefinition.isSingleton()) {
+            singletonBeanContainer.put(beanName, beanInstance);
+        }
 
         return beanInstance;
     }
