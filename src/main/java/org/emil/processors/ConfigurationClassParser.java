@@ -27,13 +27,13 @@ public class ConfigurationClassParser {
             Method[] methodsArray = clazz.getDeclaredMethods();
 
             for (Method method : methodsArray) {
+                // 3. 筛选@Bean方法
                 if (method.isAnnotationPresent(Bean.class)) {
                     methods.add(method);
                 }
             }
         }
 
-        // 3. 筛选@Bean方法
         return methods;
     }
 }
